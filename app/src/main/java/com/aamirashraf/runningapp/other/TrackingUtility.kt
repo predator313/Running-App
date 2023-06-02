@@ -6,7 +6,7 @@ import android.os.Build
 import pub.devrel.easypermissions.EasyPermissions
 
 object TrackingUtility {
-    fun hasLocationPermission(context:Context){
+    fun hasLocationPermission(context:Context)=
         if(Build.VERSION.SDK_INT<Build.VERSION_CODES.Q){
             //means that the device is not running in android q
             //so here the background location is by default we need not to include it
@@ -23,5 +23,5 @@ object TrackingUtility {
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION
             )
         }
-    }
+
 }
