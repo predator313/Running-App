@@ -17,23 +17,26 @@ import com.aamirashraf.runningapp.other.Constants.ACTION_SHOW_TRACKING_FRAGMENT
 import com.aamirashraf.runningapp.ui.fragments.TrackingFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navHostFragment: NavHostFragment
+//    private lateinit var navHostFragment: NavHostFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        navigateToTrackingFragmentIfNeeded(intent)
+
         binding=ActivityMainBinding.inflate(layoutInflater)
 //        setContentView(R.layout.activity_main)
         setContentView(binding.root)
         val toolbar=findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-         navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+    navigateToTrackingFragmentIfNeeded(intent)
+//         navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+       val  navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment)
 
-        binding.bottomNavigationView.setupWithNavController(navHostFragment.findNavController())
-        navHostFragment.findNavController().addOnDestinationChangedListener{_,destination,_ ->
+        binding.bottomNavigationView.setupWithNavController(navHostFragment!!.findNavController())
+        navHostFragment.findNavController().addOnDestinationChangedListener{ _, destination, _ ->
             when(destination.id){
                 R.id.settingsFragment,R.id.runFragment,R.id.statisticFragment ->
                     binding.bottomNavigationView.visibility=View.VISIBLE
@@ -50,7 +53,11 @@ class MainActivity : AppCompatActivity() {
     }
     private fun navigateToTrackingFragmentIfNeeded(intent: Intent?){
         if(intent?.action==ACTION_SHOW_TRACKING_FRAGMENT){
-            navHostFragment.findNavController().navigate(R.id.action_global_tracing_fragment)
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment)
+//
+            navHostFragment!!.findNavController().navigate(R.id.action_global_tracing_fragment)
+
+//
         }
     }
 }
