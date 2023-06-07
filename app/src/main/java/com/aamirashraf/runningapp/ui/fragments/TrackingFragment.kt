@@ -36,6 +36,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Calendar
+import javax.inject.Inject
 import kotlin.math.round
 
 @AndroidEntryPoint
@@ -51,7 +52,8 @@ class TrackingFragment:Fragment(R.layout.fragment_tracking) {
     private var menu:Menu?=null
     lateinit var btnToggleRun:Button
     lateinit var btnFinishRun:Button
-    private var weight=80f
+    @set:Inject
+     var weight=80f
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
