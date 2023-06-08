@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity() {
        val  navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment)
 
         binding.bottomNavigationView.setupWithNavController(navHostFragment!!.findNavController())
+    //below is important as this wont reload the same fragment again
+       binding.bottomNavigationView.setOnItemReselectedListener { /*do nothing*/ }
         navHostFragment.findNavController().addOnDestinationChangedListener{ _, destination, _ ->
             when(destination.id){
                 R.id.settingsFragment,R.id.runFragment,R.id.statisticFragment ->
